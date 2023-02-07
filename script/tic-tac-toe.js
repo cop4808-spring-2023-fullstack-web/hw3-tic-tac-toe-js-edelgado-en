@@ -8,8 +8,6 @@ const winningMessage = () => `Player ${currentPlayer} has won!`;
 const drawMessage = () => `Game ended in a draw!`;
 const currentPlayerTurn = () => `It's ${currentPlayer}'s turn`;
 
-statusDisplay.innerHTML = currentPlayerTurn();
-
 const winningConditions = [
     [0, 1, 2],
     [3, 4, 5],
@@ -20,6 +18,40 @@ const winningConditions = [
     [0, 4, 8],
     [2, 4, 6]
 ];
+
+// Randomly pick who starts - You are X, computer is O. Randomly pick a number between 0 and 1. 
+let random = Math.floor(Math.random() * 2);
+if (random === 0) {
+    currentPlayer = "O";
+    statusDisplay.innerHTML = currentPlayerTurn();
+    computerTurn();
+} else {
+    statusDisplay.innerHTML = "Your turn";
+}
+
+
+/**
+ * Computer's turn. Randomly pick a cell to play.
+ * There are 9 cells, so the random number will be between 0 and 8.
+ * if the cell is empty, play there. Otherwise, call the function again.
+ * if the game is over, just return.
+ * 
+ * @returns {void}
+ */
+function computerTurn() {
+    if (!gameActive) {
+        return;
+    }
+
+    let random = Math.floor(Math.random() * 9);
+    if (gameState[random] === "") {
+        gameState[random] = "O";
+        document.querySelectorAll('.cell')[random].innerHTML = "O";
+        handleResultValidation();
+    } else {
+        computerTurn();
+    }
+}
 
 function handleCellPlayed(clickedCell, clickedCellIndex) {
     gameState[clickedCellIndex] = currentPlayer;
