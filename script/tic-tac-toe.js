@@ -58,9 +58,20 @@ function handleCellPlayed(clickedCell, clickedCellIndex) {
     clickedCell.innerHTML = currentPlayer;
 }
 
+/**
+ * Change the current player. If the current player is X,
+ * change it to O and let the computer play.
+ * 
+ */
 function handlePlayerChange() {
-    currentPlayer = currentPlayer === "X" ? "O" : "X";
-    statusDisplay.innerHTML = currentPlayerTurn();
+    if (currentPlayer === "X") {
+        currentPlayer = "O";
+        statusDisplay.innerHTML = "Computer's turn";
+        computerTurn();
+    } else {
+        currentPlayer = "X";
+        statusDisplay.innerHTML = "Your turn";
+    }
 }
 
 function handleResultValidation() {
