@@ -1,5 +1,12 @@
 const statusDisplay = document.querySelector('.status');
 
+//Declare variables to keep track of the your score and the computer's score.
+let score = 0;
+let computerScore = 0;
+const scoreDisplay = document.querySelector('.score');
+const computerScoreDisplay = document.querySelector('.computer-score');
+
+
 let gameActive = true;
 let currentPlayer = "X";
 let gameState = ["", "", "", "", "", "", "", "", ""];
@@ -91,6 +98,15 @@ function handleResultValidation() {
             document.querySelectorAll('.cell')[winCondition[1]].style.color = "rgb(251,100,204)";
             document.querySelectorAll('.cell')[winCondition[2]].style.color = "rgb(251,100,204)";
             
+            //Update the score depending on who won. Update the corresponding display div.
+            if (currentPlayer === "X") {
+                score++;
+                scoreDisplay.innerHTML = score;
+            } else {
+                computerScore++;
+                computerScoreDisplay.innerHTML = computerScore;
+            }
+
             break
         }
     }
