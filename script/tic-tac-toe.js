@@ -86,6 +86,11 @@ function handleResultValidation() {
         }
         if (a === b && b === c) {
             roundWon = true;
+            //Highlight what tiles triggered the win - the winning squares. Should be 3 tiles.
+            document.querySelectorAll('.cell')[winCondition[0]].style.color = "rgb(251,100,204)";
+            document.querySelectorAll('.cell')[winCondition[1]].style.color = "rgb(251,100,204)";
+            document.querySelectorAll('.cell')[winCondition[2]].style.color = "rgb(251,100,204)";
+            
             break
         }
     }
