@@ -53,7 +53,7 @@ function computerTurn() {
 
     // add a sleep delay to make it look like the computer is thinking
     // use a promise to wait for the sleep to finish
-    sleep(1500).then(() => {
+    sleep(1000).then(() => {
         let random = Math.floor(Math.random() * 9);
         if (gameState[random] === "") {
             gameState[random] = "O";
@@ -108,25 +108,19 @@ function handleResultValidation() {
         }
         if (a === b && b === c) {
             roundWon = true;
+            
             //Highlight what tiles triggered the win - the winning squares. Should be 3 tiles.
             document.querySelectorAll('.cell')[winCondition[0]].style.color = "rgb(251,100,204)";
             document.querySelectorAll('.cell')[winCondition[1]].style.color = "rgb(251,100,204)";
             document.querySelectorAll('.cell')[winCondition[2]].style.color = "rgb(251,100,204)";
             
-            //Update the score depending on who won. Update the corresponding display div.
-            if (currentPlayer === "X") {
-                score++;
-                scoreDisplay.innerHTML = score;
-            } else {
-                computerScore++;
-                computerScoreDisplay.innerHTML = computerScore;
-            }
-
             break
         }
     }
 
     if (roundWon) {
+        updateWinScore();
+
         statusDisplay.innerHTML = winningMessage();
         gameActive = false;
         statusDisplay.style.color = "rgb(251,100,204)";
@@ -135,12 +129,7 @@ function handleResultValidation() {
 
     let roundDraw = !gameState.includes("");
     if (roundDraw) {
-        statusDisplay.innerHTML = drawMessage();
-        gameActive = false;
-        statusDisplay.style.color = "rgb(251,100,204)";
-        
-        tieScore++;
-        tieScopeDisplay.innerHTML = tieScore;
+        handleRoundDraw();
 
         return;
     }
@@ -167,6 +156,33 @@ function handleRestartGame() {
     statusDisplay.style.color = "rgb(65, 65, 65)";
     statusDisplay.innerHTML = currentPlayerTurn();
     document.querySelectorAll('.cell').forEach(cell => cell.innerHTML = "");
+}
+
+/**
+ * Updates the score depending on who won. Update the corresponding display div.
+ * This function does not update the tie score.
+ * The tie score is updated in the handleResultValidation function.
+ */
+function updateWinScore() {
+    if (currentPlayer === "X") {
+        score++;
+        scoreDisplay.innerHTML = score;
+    } else {
+        computerScore++;
+        computerScoreDisplay.innerHTML = computerScore;
+    }
+}
+
+/**
+ * Updates the tie score and the display div.
+ */
+function handleRoundDraw() {
+    statusDisplay.innerHTML = drawMessage();
+    gameActive = false;
+    statusDisplay.style.color = "rgb(251,100,204)";
+    
+    tieScore++;
+    tieScopeDisplay.innerHTML = tieScore;
 }
 
 document.querySelectorAll('.cell').forEach(cell => cell.addEventListener('click', handleCellClick));
