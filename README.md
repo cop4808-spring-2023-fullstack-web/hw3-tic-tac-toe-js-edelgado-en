@@ -1,12 +1,11 @@
-<div align="center">
-  
-  <img src="./logo.png" height="150px">
-  <h3>Tic-Tac-Toe</h3>
+## Tic Tac Toe Game
 
-  <div> Enrique Delgado </div>
-  <div> z23490533 </div>    
-</div>
+### Author
+- Enrique Delgado
+- z23490533
 
+### Demo
+<img src="http://g.recordit.co/xrFXQtGyqT.gif" width=600>
 
 
 
