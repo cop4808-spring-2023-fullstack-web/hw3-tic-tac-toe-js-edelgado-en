@@ -5,12 +5,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tic-Tac-Toe</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
     <link rel="stylesheet" href="./styles/style.css" />
   </head>
 
   <body>
     <div class="header">Tic-Tac-Toe</div>
-    <div class="container">
+    <div class="wrapper">
       <div class="cell" data-cell-index="0"></div>
       <div class="cell" data-cell-index="1"></div>
       <div class="cell" data-cell-index="2"></div>
@@ -24,22 +34,32 @@
     <p class="status"></p>
     <button class="restart">New Game</button>
 
-    <!-- score -->
-    <div class="score-board">
-      <div>Score</div>
-      <div class="score-player">
-        <div class="score-name">You</div>
-        <div class="score">0</div>
+    <div class="container w-400">
+        <h2>Score</h2>
+        <p>Checkout the scores against the computer.</p>            
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Player</th>
+              <th>Score</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>You</td>
+              <td class="score">0</td>
+            </tr>
+            <tr>
+              <td>Computer</td>
+              <td class="computer-score">0</td>
+            </tr>
+            <tr>
+              <td>Draw</td>
+              <td class="draw-score">0</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-      <div class="score-player">
-        <div class="score-name">Computer</div>
-        <div class="computer-score">0</div>
-      </div>
-      <div class="score-player">
-        <div class="score-name">Draw</div>
-        <div class="draw-score">0</div>
-      </div>
-    </div>
 
     <footer>
       <p>MADE WITH <span id="heart">♥</span> BY 
