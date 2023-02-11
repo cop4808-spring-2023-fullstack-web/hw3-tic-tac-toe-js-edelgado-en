@@ -58,6 +58,9 @@ function computerTurn() {
         if (gameState[random] === "") {
             gameState[random] = "O";
             document.querySelectorAll('.cell')[random].innerHTML = "O";
+            
+            console.log("Computer played at " + random);
+
             handleResultValidation();
         } else {
             computerTurn();
@@ -171,6 +174,8 @@ function updateWinScore() {
         computerScore++;
         computerScoreDisplay.innerHTML = computerScore;
     }
+
+    console.log("Player: " + score + " Computer: " + computerScore);
 }
 
 /**
@@ -183,6 +188,8 @@ function handleRoundDraw() {
     
     tieScore++;
     tieScopeDisplay.innerHTML = tieScore;
+
+    console.log("Tie: " + tieScore);
 }
 
 document.querySelectorAll('.cell').forEach(cell => cell.addEventListener('click', handleCellClick));
