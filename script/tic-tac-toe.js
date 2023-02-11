@@ -3,8 +3,10 @@ const statusDisplay = document.querySelector('.status');
 //Declare variables to keep track of the your score and the computer's score.
 let score = 0;
 let computerScore = 0;
+let tieScore = 0;
 const scoreDisplay = document.querySelector('.score');
 const computerScoreDisplay = document.querySelector('.computer-score');
+const tieScopeDisplay = document.querySelector('.tie-score');
 
 
 let gameActive = true;
@@ -36,7 +38,6 @@ if (random === 0) {
     statusDisplay.innerHTML = "Your turn";
 }
 
-
 /**
  * Computer's turn. Randomly pick a cell to play.
  * There are 9 cells, so the random number will be between 0 and 8.
@@ -50,19 +51,33 @@ function computerTurn() {
         return;
     }
 
-    let random = Math.floor(Math.random() * 9);
-    if (gameState[random] === "") {
-        gameState[random] = "O";
-        document.querySelectorAll('.cell')[random].innerHTML = "O";
-        handleResultValidation();
-    } else {
-        computerTurn();
-    }
+    // add a sleep delay to make it look like the computer is thinking
+    // use a promise to wait for the sleep to finish
+    sleep(1500).then(() => {
+        let random = Math.floor(Math.random() * 9);
+        if (gameState[random] === "") {
+            gameState[random] = "O";
+            document.querySelectorAll('.cell')[random].innerHTML = "O";
+            handleResultValidation();
+        } else {
+            computerTurn();
+        }
+    });
 }
 
 function handleCellPlayed(clickedCell, clickedCellIndex) {
     gameState[clickedCellIndex] = currentPlayer;
     clickedCell.innerHTML = currentPlayer;
+}
+
+/**
+ * Returns a promise that resolves after ms milliseconds.
+ * 
+ * @param ms the number of miliseconds you want to sleep for
+ * @returns 
+ */
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 /**
@@ -123,6 +138,10 @@ function handleResultValidation() {
         statusDisplay.innerHTML = drawMessage();
         gameActive = false;
         statusDisplay.style.color = "rgb(251,100,204)";
+        
+        tieScore++;
+        tieScopeDisplay.innerHTML = tieScore;
+
         return;
     }
 
